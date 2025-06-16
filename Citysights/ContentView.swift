@@ -21,6 +21,9 @@ struct ContentView: View {
                 Text("Go")
                     .padding(.horizontal)
                     .padding(.vertical, 10)
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .cornerRadius(10)
             }
         }
         .padding()
