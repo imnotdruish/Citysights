@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State var query: String = ""
+    var service = DataService()
     
     var body: some View {
         HStack {
             TextField("What are you looking for?", text: $query)
                 .textFieldStyle(.roundedBorder)
-
+            
             Button {
-                search()
+
             } label: {
                 Text("Go")
                     .padding(.horizontal)
@@ -27,10 +28,9 @@ struct ContentView: View {
             }
         }
         .padding()
-    }
-    
-    func search() {
-        print(query)
+        .task {
+            await service.businessSearch()
+        }
     }
 }
 
