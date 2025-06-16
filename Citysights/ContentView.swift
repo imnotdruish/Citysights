@@ -16,12 +16,16 @@ struct ContentView: View {
                 .textFieldStyle(.roundedBorder)
 
             Button {
-                
+                search()
             } label: {
                 Text("Go")
             }
         }
         .padding()
+    }
+    
+    func search() {
+        print(query)
     }
 }
 
