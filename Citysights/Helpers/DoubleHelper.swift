@@ -14,3 +14,8 @@ extension Double {
         return numberToRound.rounded() / n
     }
 }
+
+func roundedNum(num: Double) -> Double {
+    let roundNum = num.round(nearest: 0.5)
+    return roundNum
+}

@@ -71,11 +71,6 @@ struct ContentView: View {
             BusinessDetailView(business: item)
         }
     }
-    
-    func roundedNum(num: Double) -> Double {
-        let roundNum = num.round(nearest: 0.5)
-        return roundNum
-    }
 }
 
 #Preview {
