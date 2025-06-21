@@ -56,11 +56,12 @@ struct BusinessDetailView: View {
             }
 
             ScrollView {
-                VStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(business?.name ?? "")
                         .font(Font.system(size: 21))
                         .bold()
                         .padding(.bottom, 10)
+                        .padding(.top, 16)
                     
                     Text("\(business?.location?.address1 ?? ""), \(business?.location?.city ?? "")")
                     Text("\(business?.location?.state ?? ""), \(business?.location?.zipCode ?? ""), \(business?.location?.country ?? "")")
@@ -71,36 +72,61 @@ struct BusinessDetailView: View {
                         HStack {
                             Image("regular_\(result)")
                         }
+                        .padding(.bottom, 16)
                     }
                     
                     Divider()
                     
                     HStack {
-                        Image(systemName: "phone")
-                        Text(business?.phone ?? "")
-                        Spacer()
-                        Image(systemName: "arrow.right")
+                        if let url = URL(string: "tel://\(business?.phone ?? "")") {
+                            Image(systemName: "phone")
+                            Link(destination: url) {
+                                Text(business?.phone ?? "")
+                            }
+                            Spacer()
+                            Image(systemName: "arrow.right")
+
+                        } else {
+                            Image(systemName: "phone")
+                            Text(business?.phone ?? "")
+                        }
                     }
                     .padding(.vertical, 12)
 
                     Divider()
                     
                     HStack {
-                        Image(systemName: "globe")
-                        Text(business?.url ?? "")
-                            .lineLimit(1)
-                        Spacer()
-                        Image(systemName: "arrow.right")
+                        if let url = URL(string: "\(business?.url ?? "")") {
+                            Image(systemName: "globe")
+                            Link(destination: url) {
+                                Text(business?.url ?? "")
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                            Image(systemName: "arrow.right")
+
+                        } else {
+                            Image(systemName: "globe")
+                            Text(business?.url ?? "")
+                                .lineLimit(1)
+                        }
                     }
                     .padding(.vertical, 12)
+                    
+//                    HStack {
+//                        Image(systemName: "globe")
+//                        Text(business?.url ?? "")
+//                            .lineLimit(1)
+//                        Spacer()
+//                        Image(systemName: "arrow.right")
+//                    }
+//                    .padding(.vertical, 12)
                     
                     Divider()
                     
                     HStack {
                         Image(systemName: "bubble.left.and.bubble.right")
                         Text("\(business?.reviewCount ?? 0) reviews")
-                        Spacer()
-                        Image(systemName: "arrow.right")
                     }
                     .padding(.vertical, 12)
                     
