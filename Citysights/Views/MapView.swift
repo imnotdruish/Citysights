@@ -25,11 +25,13 @@ struct MapView: View {
         }
         .onChange(of: selectedBusinessId) { oldValue, newValue in
             // Find the business which matches this id
-            let business = model.businesses.first { $0.id == newValue }
+            let business = model.businesses.first { business in
+                business.id == selectedBusinessId
+            }
             
             // if the business is found, set it as the selected one
-            if let business = business {
-                model.selectedBusiness = business
+            if business != nil {
+                model.selectedBusiness = business!
             }
         }
     }

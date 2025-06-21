@@ -28,6 +28,7 @@ struct ListView: View {
                                 
                             } placeholder: {
                                 ProgressView()
+                                    .frame(width: 50, height: 50)
                             }
                         } else {
                             Image("list-placeholder-image")
