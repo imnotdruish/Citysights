@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct HomeView: View {
 
@@ -84,7 +85,25 @@ struct HomeView: View {
             .pickerStyle(SegmentedPickerStyle())
             
             // Show Map or List
-            if selectedTab == 1 {
+            if model.locationAuthStatus == .denied {
+                Spacer()
+                
+                Text("Please allow locations ervice for this app to see sights near you.")
+                    .padding(.horizontal)
+                
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                    
+                } label: {
+                    Text("Open App Privacy Settings")
+                }
+                .buttonStyle(.bordered)
+                
+                Spacer()
+                
+            } else if selectedTab == 1 {
                 MapView()
                     .onTapGesture {
                         withAnimation {
@@ -100,9 +119,6 @@ struct HomeView: View {
                         }
                     }
             }
-        }
-        .onAppear {
-            model.getBusinesses(query: nil, options: nil, category: nil)
         }
         .sheet(item: $model.selectedBusiness) { item in
             BusinessDetailView()

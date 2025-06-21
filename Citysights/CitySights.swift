@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 @main
 struct CitySights: App {
@@ -25,7 +26,7 @@ struct CitySights: App {
                 }
                 .onAppear {
                     // if no onboarding is needed, still get location
-                    if needsOnboarding == false {
+                    if needsOnboarding == false && model.locationAuthStatus == .notDetermined {
                         model.getUserLocation()
                     }
                 }
